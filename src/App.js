@@ -102,10 +102,23 @@ function App() {
       }
     })
     content = <Article title={title} body={body}></Article>;
-    contextControll = <li><a href={'/update/' + id} onClick={event=>{
+    contextControll = <><li><a href={'/update/' + id} onClick={event=>{
       event.preventDefault();
       setMode('UPDATE');
-    }}>Update</a></li>;
+    }}>Update</a></li>
+    <li> 
+      <input type='button' value='Delete' onClick={() => {
+        const newTopics = [];
+        for(let i = 0; i<topics.length; i++) {
+          if(topics[i].id !== id) {
+            newTopics.push(topics[i]);
+          }
+          setTopics(newTopics);
+          setMode('WELCOME');
+        }
+      }}></input>
+    </li>
+    </>;
   } else if (mode === 'CREATE') {
     content = <Create onCreate={(_title, _body) => {
       const newTopics = [...topics];
